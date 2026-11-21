@@ -16,6 +16,10 @@ TEXT = (
 
 
 def main() -> None:
+    # The competition's own rule: 1-280 characters, not only whitespace.
+    # Fail loudly here rather than writing a bad file.
+    if not 1 <= len(TEXT) <= 280 or not TEXT.strip():
+        raise SystemExit("entry text must be 1-280 characters, not only whitespace")
     out_path = os.environ.get("ENTRY_OUTPUT", "/output/entry.txt")
     parent = os.path.dirname(out_path)
     if parent:
